@@ -4,9 +4,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/AN1388_Source_Code_2014_02_14/PIC32_Bootloaders/Firmware/Bootloader/Include/USB/usb.h</file>
-            <file>file:/C:/AN1388_Source_Code_2014_02_14/PIC32_Bootloaders/Firmware/Bootloader/Source/USB/usb_function_hid.c</file>
-            <file>file:/C:/AN1388_Source_Code_2014_02_14/PIC32_Bootloaders/Firmware/Bootloader/Source/USB/usb_descriptors.c</file>
+            <file>file:/C:/Users/fedor/source/repos/_PIC/PIC32MX220F032BBootloader/linker_scripts/others/btl_32MX220F032B_generic.ld</file>
+            <file>file:/C:/Users/fedor/source/repos/_PIC/PIC32MX220F032BBootloader/Include/HardwareProfile/HardwareProfile.h</file>
+            <file>file:/C:/Users/fedor/source/repos/_PIC/PIC32MX220F032BBootloader/Source/USB/usb_device.c</file>
+            <file>file:/C:/Users/fedor/source/repos/_PIC/PIC32MX220F032BBootloader/Source/USB/Usb_HID_tasks.c</file>
+            <file>file:/C:/Users/fedor/source/repos/_PIC/PIC32MX220F032BBootloader/Source/BootLoader.c</file>
+            <file>file:/C:/Users/fedor/source/repos/_PIC/PIC32MX220F032BBootloader/Include/USB/usb.h</file>
+            <file>file:/C:/Users/fedor/source/repos/_PIC/PIC32MX220F032BBootloader/Include/USB/usb_common.h</file>
         </group>
     </open-files>
 </project-private>

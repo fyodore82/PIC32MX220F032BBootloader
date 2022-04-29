@@ -41,11 +41,11 @@
     //  for your application.
 
     //#define USE_SELF_POWER_SENSE_IO
-    #define tris_self_power     TRISAbits.TRISA2    // Input
+    //#define tris_self_power     TRISAbits.TRISA2    // Input
     #define self_power          1
 
     //#define USE_USB_BUS_SENSE_IO
-    #define tris_usb_bus_sense  TRISBbits.TRISB5    // Input
+    //#define tris_usb_bus_sense  TRISBbits.TRISB5    // Input
     #define USB_BUS_SENSE       1 
 
     /*******************************************************************/
@@ -66,21 +66,21 @@
 
 
 	
-	#define mLED              LATDbits.LATD2
+	// #define mLED              LATDbits.LATD2
 	// Blinks LED 1 on USB Starter kit
-	#define BlinkLED() (mLED = ((ReadCoreTimer() & 0x0800000) != 0))
-	#define InitLED() do{	\
+	// #define BlinkLED() (mLED = ((ReadCoreTimer() & 0x0800000) != 0))
+	/* #define InitLED() do{	\
 							AD1PCFG = 0; \
 							TRISDbits.TRISD2 = 0;  \
 							TRISDbits.TRISD1 = 0;  \
 							TRISDbits.TRISD0 = 0;  \
 							LATDbits.LATD0 = 0; LATDbits.LATD1 = 0; LATDbits.LATD2 = 0;\
 						}while(0)					
-	
+	*/
 	// Switch S3 on USB Starter Kit.
-	#define ReadSwitchStatus() (PORTReadBits(IOPORT_D, BIT_13) & BIT_13)
+	// #define ReadSwitchStatus() (PORTReadBits(IOPORT_D, BIT_13) & BIT_13)
    // Error indication.	
-	#define Error()   do{LATDbits.LATD0 = 1; LATDbits.LATD1 = 1; LATDbits.LATD2 = 1;} while(0);
+	// #define Error()   do{LATDbits.LATD0 = 1; LATDbits.LATD1 = 1; LATDbits.LATD2 = 1;} while(0);
 
 	
 

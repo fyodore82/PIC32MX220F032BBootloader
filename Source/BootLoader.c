@@ -48,16 +48,17 @@
 // 80Mhz Core/Periph, Pri Osc w/PLL, Write protect Boot Flash
 #if defined(TRANSPORT_LAYER_USB) || defined(TRANSPORT_LAYER_USB_HOST)
     #pragma config UPLLEN   = ON        // USB PLL Enabled
-    #pragma config UPLLIDIV = DIV_2     // USB PLL Input Divider = Divide by 2
+    #pragma config UPLLIDIV = DIV_5     // USB PLL Input Divider = Divide by 5 (20 / 5 = 4)
 #endif
 
 #pragma config DEBUG    = OFF           // Background Debugger disabled
-#pragma config FPLLMUL = MUL_20         // PLL Multiplier: Multiply by 20
-#pragma config FPLLIDIV = DIV_2         // PLL Input Divider:  Divide by 2
+#pragma config FPLLMUL = MUL_24         // PLL Multiplier: Multiply by 24 (4 * 24 = 96))
+#pragma config FPLLIDIV = DIV_5         // PLL Input Divider:  Divide by 5 (20 / 5 = 4)
 
 #if defined(__PIC32MX1XX_2XX__)
     // For PIC32MX1xx, PIC32MX2xx devices the output divisor is set to 2 to produce max 40MHz clock.
-    #pragma config FPLLODIV = DIV_2         // PLL Output Divider: Divide by 2
+    // 48Mhz clock
+    #pragma config FPLLODIV = DIV_2         // PLL Output Divider: Divide by 2 (96 / 2 = 48)
 #elif defined (__PIC32MX3XX_7XX__)
     //For PIC32MX3xx, PIC32MX4xx, PIC32MX5xx, PIC32MX6xx and PIC32MX7xx devices, 
     //the output divisor is set to 1 to produce max 80MHz clock.
@@ -72,7 +73,7 @@
 
 #if defined(__PIC32MX1XX_2XX__)
     // For PIC32MX1xx, PIC32MX2xx devices there are jumpers on PIM to choose from PGx1/PGx2.
-    #pragma config ICESEL = ICS_PGx1    // ICE pins configured on PGx1 (PGx2 is multiplexed with USB D+ and D- pins).
+    #pragma config ICESEL = ICS_PGx3    // ICE pins configured on PGx1 (PGx2 is multiplexed with USB D+ and D- pins).
 #elif defined(__PIC32MX3XX_7XX__)
     // For PIC32MX3xx, PIC32MX4xx, PIC32MX5xx, PIC32MX6xx and PIC32MX7xx 
     // devices the ICE connection is on PGx2. .
@@ -125,7 +126,7 @@ INT main(void)
 	
 	// Enter firmware upgrade mode if there is a trigger or if the application is not valid
 //	if(CheckTrigger() || !ValidAppPresent())
-	if(!ValidAppPresent())
+	if(1 || !ValidAppPresent())
 	{
 		// Initialize the transport layer - UART/USB/Ethernet
 		TRANS_LAYER_Init(pbClk);
