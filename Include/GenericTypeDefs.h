@@ -291,29 +291,29 @@ typedef union _QWORD_VAL
 
 //TODO: (DF) had to remove these functions based on C18 requirements for non-inline usage
     #if !defined(__18CXX)
-        extern inline DWORD __attribute__ ((always_inline)) _arrayToDword(BYTE *array)
-        {
-            DWORD_VAL   data;
+//        extern inline DWORD __attribute__ ((always_inline)) _arrayToDword(BYTE *array)
+//        {
+//            DWORD_VAL   data;
+//        
+//            data.v[0] = array[0];
+//            data.v[1] = array[1];
+//            data.v[2] = array[2];
+//            data.v[3] = array[3];
+//        
+//            return data.Val;
+//        }
         
-            data.v[0] = array[0];
-            data.v[1] = array[1];
-            data.v[2] = array[2];
-            data.v[3] = array[3];
-        
-            return data.Val;
-        }
-        
-        extern inline void __attribute__ ((always_inline)) _dwordToArray(DWORD data, BYTE *array)
-        {
-            DWORD_VAL   temp;
-        
-            temp.Val    = data;
-            array[0]   = temp.v[0];
-            array[1]   = temp.v[1];
-            array[2]   = temp.v[2];
-            array[3]   = temp.v[3];
-        
-        }
+//        extern inline void __attribute__ ((always_inline)) _dwordToArray(DWORD data, BYTE *array)
+//        {
+//            DWORD_VAL   temp;
+//        
+//            temp.Val    = data;
+//            array[0]   = temp.v[0];
+//            array[1]   = temp.v[1];
+//            array[2]   = temp.v[2];
+//            array[3]   = temp.v[3];
+//        
+//        }
     #endif
 
 #endif //__GENERIC_TYPE_DEFS_H_

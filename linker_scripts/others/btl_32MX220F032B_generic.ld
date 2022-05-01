@@ -17,13 +17,13 @@ PROVIDE(_min_stack_size = 0x400) ;
 /*************************************************************************
  * Processor-specific object file.  Contains SFR definitions.
  *************************************************************************/
-INPUT("processor.o")
+/* INPUT("processor.o") */
 
 /*************************************************************************
  * Processor-specific peripheral libraries are optional
  *************************************************************************/
-INPUT("libmchp_peripheral.a")
-INPUT("libmchp_peripheral_32MX220F032B.a")
+/* INPUT("libmchp_peripheral.a")
+ * INPUT("libmchp_peripheral_32MX220F032B.a") */
 
 /*************************************************************************
  * For interrupt vector handling

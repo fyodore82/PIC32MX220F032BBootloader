@@ -14,8 +14,8 @@
  * Software License Agreement
  *
  * The software supplied herewith by Microchip Technology Incorporated
- * (the “Company”) for its PIC32 Microcontroller is intended
- * and supplied to you, the Company’s customer, for use solely and
+ * (the ï¿½Companyï¿½) for its PIC32 Microcontroller is intended
+ * and supplied to you, the Companyï¿½s customer, for use solely and
  * exclusively on Microchip PIC32 Microcontroller products.
  * The software is owned by the Company and/or its supplier, and is
  * protected under applicable copyright laws. All rights are reserved.
@@ -24,7 +24,7 @@
  * civil liability for the breach of the terms and conditions of this
  * license.
  *
- * THIS SOFTWARE IS PROVIDED IN AN “AS IS” CONDITION. NO WARRANTIES,
+ * THIS SOFTWARE IS PROVIDED IN AN ï¿½AS ISï¿½ CONDITION. NO WARRANTIES,
  * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
  * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
  * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
@@ -43,8 +43,9 @@
 #include "Include\Framework\Framework.h"
 #include "Include\NVMem.h"
 #include  <string.h>
-#include <plib.h>
-
+// #include <plib.h>
+#include <xc.h>
+#include "Include\addressConvertion.h"
 
 
 
@@ -65,9 +66,6 @@
     #define DEV_CONFIG_REG_BASE_ADDRESS 0x9FC02FF0
     #define DEV_CONFIG_REG_END_ADDRESS   0x9FC02FFF
 #endif
-
-
-
 
 
 typedef enum

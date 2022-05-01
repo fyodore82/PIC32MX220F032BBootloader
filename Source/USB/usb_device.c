@@ -713,46 +713,48 @@ void USBDeviceTasks(void)
     //If the interrupt option is selected then the customer is required
     //  to notify the stack when the device is attached or removed from the
     //  bus by calling the USBDeviceAttach() and USBDeviceDetach() functions.
-    if (USB_BUS_SENSE != 1)
-    {
-         // Disable module & detach from bus
-         U1CON = 0;             
-
-         // Mask all USB interrupts              
-         U1IE = 0;          
-
-         //Move to the detached state                  
-         USBDeviceState = DETACHED_STATE;
-
-         #ifdef  USB_SUPPORT_OTG    
-             //Disable D+ Pullup
-             U1OTGCONbits.DPPULUP = 0;
-
-             //Disable HNP
-             USBOTGDisableHnp();
-
-             //Deactivate HNP
-             USBOTGDeactivateHnp();
-             
-             //If ID Pin Changed State
-             if (USBIDIF && USBIDIE)
-             {  
-                 //Re-detect & Initialize
-                  USBOTGInitialize();
-
-                  //Clear ID Interrupt Flag
-                  USBClearInterruptFlag(USBIDIFReg,USBIDIFBitNum);
-             }
-         #endif
-
-         #if defined __C30__ || defined __XC16__
-             //USBClearInterruptFlag(U1OTGIR, 3); 
-         #endif
-            //return so that we don't go through the rest of 
-            //the state machine
-         USBClearUSBInterrupt();
-         return;
-    }
+    
+    // USB_BUS_SENSE is 1, no need this code
+//    if (USB_BUS_SENSE != 1)
+//    {
+//         // Disable module & detach from bus
+//         U1CON = 0;             
+//
+//         // Mask all USB interrupts              
+//         U1IE = 0;          
+//
+//         //Move to the detached state                  
+//         USBDeviceState = DETACHED_STATE;
+//
+//         #ifdef  USB_SUPPORT_OTG    
+//             //Disable D+ Pullup
+//             U1OTGCONbits.DPPULUP = 0;
+//
+//             //Disable HNP
+//             USBOTGDisableHnp();
+//
+//             //Deactivate HNP
+//             USBOTGDeactivateHnp();
+//             
+//             //If ID Pin Changed State
+//             if (USBIDIF && USBIDIE)
+//             {  
+//                 //Re-detect & Initialize
+//                  USBOTGInitialize();
+//
+//                  //Clear ID Interrupt Flag
+//                  USBClearInterruptFlag(USBIDIFReg,USBIDIFBitNum);
+//             }
+//         #endif
+//
+//         #if defined __C30__ || defined __XC16__
+//             //USBClearInterruptFlag(U1OTGIR, 3); 
+//         #endif
+//            //return so that we don't go through the rest of 
+//            //the state machine
+//         USBClearUSBInterrupt();
+//         return;
+//    }
 
 	#ifdef USB_SUPPORT_OTG
     //If Session Is Started Then
@@ -1405,7 +1407,7 @@ void USBCancelIO(BYTE endpoint)
         USBDeviceDetach() and USBDeviceAttach() functions are not available.  
         In this mode, the USB stack relies on the "#define USE_USB_BUS_SENSE_IO" 
         and "#define USB_BUS_SENSE" options in the 
-        HardwareProfile – [platform name].h file. 
+        HardwareProfile ï¿½ [platform name].h file. 
 
         When using the USB_POLLING mode option, and the 
         "#define USE_USB_BUS_SENSE_IO" definition has been commented out, then 
@@ -1422,10 +1424,10 @@ void USBCancelIO(BYTE endpoint)
 
         In a self powered application, the USB stack is designed with the 
         intention that the user will enable the "#define USE_USB_BUS_SENSE_IO" 
-        option in the HardwareProfile – [platform name].h file.  When this 
+        option in the HardwareProfile ï¿½ [platform name].h file.  When this 
         option is defined, then the USBDeviceTasks() function will automatically 
         check the I/O pin port value of the designated pin (based on the 
-        #define USB_BUS_SENSE option in the HardwareProfile – [platform name].h 
+        #define USB_BUS_SENSE option in the HardwareProfile ï¿½ [platform name].h 
         file), every time the application calls USBDeviceTasks().  If the 
         USBDeviceTasks() function is executed and finds that the pin defined by 
         the #define USB_BUS_SENSE is in a logic low state, then it will 

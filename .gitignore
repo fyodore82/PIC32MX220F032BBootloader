@@ -4,3 +4,7 @@ dist/
 
 *.obj
 *.i
+*.map
+**/*.map
+.map
+**/.generated_files/

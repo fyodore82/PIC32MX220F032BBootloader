@@ -14,8 +14,8 @@
  * Software License Agreement
  *
  * The software supplied herewith by Microchip Technology Incorporated
- * (the “Company”) for its PIC32 Microcontroller is intended
- * and supplied to you, the Company’s customer, for use solely and
+ * (the ï¿½Companyï¿½) for its PIC32 Microcontroller is intended
+ * and supplied to you, the Companyï¿½s customer, for use solely and
  * exclusively on Microchip PIC32 Microcontroller products.
  * The software is owned by the Company and/or its supplier, and is
  * protected under applicable copyright laws. All rights are reserved.
@@ -24,7 +24,7 @@
  * civil liability for the breach of the terms and conditions of this
  * license.
  *
- * THIS SOFTWARE IS PROVIDED IN AN “AS IS” CONDITION. NO WARRANTIES,
+ * THIS SOFTWARE IS PROVIDED IN AN ï¿½AS ISï¿½ CONDITION. NO WARRANTIES,
  * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
  * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
  * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
@@ -41,8 +41,9 @@
 #include "Include\BootLoader.h"
 #include "Include\Framework\Framework.h"
 #include "Include\NVMem.h"
-#include <plib.h>
-
+// #include <plib.h>
+#include <xc.h>
+#include "Include\addressConvertion.h"
 
 const UINT countPerMicroSec = ((SYS_FREQ/1000000)/2);
 #define NVMemIsError()    (NVMCON & (_NVMCON_WRERR_MASK | _NVMCON_LVDERR_MASK))
@@ -114,7 +115,7 @@ UINT __attribute__((nomips16)) NVMemOperation(UINT nvmop)
     // Disable DMA & Disable Interrupts
 	#ifdef _DMAC
 	int_status = INTDisableInterrupts();
-	susp = DmaSuspend();
+//	susp = DmaSuspend();
 	#else
 	int_status = INTDisableInterrupts(); 
 	#endif	// _DMAC
@@ -138,7 +139,7 @@ UINT __attribute__((nomips16)) NVMemOperation(UINT nvmop)
 
 	// Enable DMA & Enable Interrupts
 	#ifdef _DMAC
-	DmaResume(susp);
+//	DmaResume(susp);
 	INTRestoreInterrupts(int_status);
 	#else
 	INTRestoreInterrupts(int_status);
