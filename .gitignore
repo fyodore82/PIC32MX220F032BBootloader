@@ -5,6 +5,9 @@ dist/
 *.obj
 *.i
 *.map
-**/*.map
+**/.map
 .map
 **/.generated_files/
+
+**/nbproject/
+!**/nbproject/**/*.xml
