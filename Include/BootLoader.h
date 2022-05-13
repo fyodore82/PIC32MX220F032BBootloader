@@ -30,7 +30,7 @@
 
 //-------User configurable macros begin---------
 #define MAJOR_VERSION 1
-#define MINOR_VERSION 0
+#define MINOR_VERSION 2
 
 
 /* APP_FLASH_BASE_ADDRESS and APP_FLASH_END_ADDRESS reserves program Flash for the application*/ 
@@ -41,14 +41,14 @@
  		 
  		2)The base address and end address must align on  4K address boundary */
  		
-#define APP_FLASH_BASE_ADDRESS 	0x9D002600 
+#define APP_FLASH_BASE_ADDRESS 	0x9D003000 
 #define APP_FLASH_END_ADDRESS   PROGRAM_FLASH_END_ADRESS
 
 /* Address of  the Flash from where the application starts executing */
 /* Rule: Set APP_FLASH_BASE_ADDRESS to _RESET_ADDR value of application linker script*/
 
 // For PIC32MX1xx and PIC32MX2xx Controllers only
-#define USER_APP_RESET_ADDRESS 	(0x9D002600 + 0x0)
+#define USER_APP_RESET_ADDRESS 	(0x9D003000 + 0x1000)
 
 
 

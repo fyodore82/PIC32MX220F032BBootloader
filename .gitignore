@@ -2,11 +2,11 @@ build/
 debug/
 dist/
 
+**/USB_HID_Btl_StarterKit.X/.map
+
 *.obj
 *.i
-*.map
-**/.map
-.map
+
 **/.generated_files/
 
 **/nbproject/
