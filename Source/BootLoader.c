@@ -54,13 +54,13 @@
 #endif
 
 #pragma config DEBUG    = OFF           // Background Debugger disabled
-#pragma config FPLLMUL = MUL_24         // PLL Multiplier: Multiply by 24 (4 * 24 = 96))
+#pragma config FPLLMUL = MUL_20         // PLL Multiplier: Multiply by 20 (4 * 20 = 80))
 #pragma config FPLLIDIV = DIV_5         // PLL Input Divider:  Divide by 5 (20 / 5 = 4)
 
 #if defined(__PIC32MX1XX_2XX__)
     // For PIC32MX1xx, PIC32MX2xx devices the output divisor is set to 2 to produce max 40MHz clock.
-    // 48Mhz clock
-    #pragma config FPLLODIV = DIV_2         // PLL Output Divider: Divide by 2 (96 / 2 = 48)
+    // 40Mhz clock
+    #pragma config FPLLODIV = DIV_2         // PLL Output Divider: Divide by 2 (80 / 2 = 40)
 #elif defined (__PIC32MX3XX_7XX__)
     //For PIC32MX3xx, PIC32MX4xx, PIC32MX5xx, PIC32MX6xx and PIC32MX7xx devices, 
     //the output divisor is set to 1 to produce max 80MHz clock.
