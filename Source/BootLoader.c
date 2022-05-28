@@ -192,11 +192,9 @@ INT main(void)
 	// Setup configuration
 	pbClk = SYSTEMConfig(SYS_FREQ, SYS_CFG_WAIT_STATES | SYS_CFG_PCACHE);
 	
-//	InitLED();
-	
-	// Enter firmware upgrade mode if there is a trigger or if the application is not valid
-//	if(CheckTrigger() || !ValidAppPresent())
-	if(1 || !ValidAppPresent())
+  UINT8 swr = RCONbits.SWR;
+  UINT8 validApp = ValidAppPresent();
+	if(!validApp || (validApp && swr))
 	{
 		// Initialize the transport layer - UART/USB/Ethernet
 		TRANS_LAYER_Init(pbClk);
