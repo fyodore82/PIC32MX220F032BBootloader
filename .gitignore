@@ -9,5 +9,9 @@ dist/
 
 **/.generated_files/
 
-**/nbproject/
-!**/nbproject/**/*.xml
+# **/nbproject/
+ #!**/nbproject/**/*.xml
+
+**/nbproject/Makefile-*
+**/nbproject/Package-*
+**/nbproject/private/

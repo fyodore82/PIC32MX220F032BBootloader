@@ -102,9 +102,9 @@ _ebase_address =  0x9D000000;
  *************************************************************************/
 _RESET_ADDR              = 0xBFC00000;
 _BEV_EXCPT_ADDR          = (0xBFC00000 + 0x380);
-_DBG_EXCPT_ADDR          = (0xBFC00000 + 0x480);
-_DBG_CODE_ADDR          = 0x9FC00490;
-_DBG_CODE_SIZE           = 0x760     ;
+/* _DBG_EXCPT_ADDR          = (0xBFC00000 + 0x480); */
+/* _DBG_CODE_ADDR          = 0x9FC00490; */
+/* _DBG_CODE_SIZE           = 0x760     ; */
 _GEN_EXCPT_ADDR          = _ebase_address + 0x180;
 
 /*************************************************************************
@@ -116,9 +116,9 @@ _GEN_EXCPT_ADDR          = _ebase_address + 0x180;
  *************************************************************************/
 MEMORY
 {
-  exception_mem              : ORIGIN = 0x9D000000, LENGTH = 0x800 /* Interrupt vector table */
-  kseg0_program_mem    (rx)  : ORIGIN = 0x9D000800, LENGTH = 0x25FF /* All C Files will be located here */
-  debug_exec_mem             : ORIGIN = 0x9FC00490, LENGTH = 0x760
+  /* exception_mem              : ORIGIN = 0x9D000000, LENGTH = 0x800 */ /* Interrupt vector table */
+  kseg0_program_mem    (rx)  : ORIGIN = 0x9D000000, LENGTH = 0x23FF /* All C Files will be located here */
+  /* debug_exec_mem             : ORIGIN = 0x9FC00490, LENGTH = 0x760 */
   kseg0_boot_mem             : ORIGIN = 0x9FC00490, LENGTH = 0x0 /* This memory region is dummy */
   kseg1_boot_mem             : ORIGIN = 0xBFC00000, LENGTH = 0x490 /* C Startup code */
   config3                    : ORIGIN = 0xBFC00BF0, LENGTH = 0x4
@@ -133,7 +133,7 @@ MEMORY
  * Memory Address Equates
  * _DBG_CODE_SIZE                 -- In-circuit Debug Executive size
  *************************************************************************/
-_DBG_CODE_SIZE                 = 0x760;
+/* _DBG_CODE_SIZE                 = 0x760; */
 
 SECTIONS
 {
@@ -159,15 +159,16 @@ SECTIONS
   {
     KEEP(*(.bev_handler))
   } > kseg1_boot_mem
-  .dbg_excpt _DBG_EXCPT_ADDR (NOLOAD) :
+/*  .dbg_excpt _DBG_EXCPT_ADDR (NOLOAD) :
   {
     . += (DEFINED (_DEBUGGER) ? 0x8 : 0x0);
   } > kseg1_boot_mem
   .dbg_code _DBG_CODE_ADDR (NOLOAD) :
   {
     . += (DEFINED (_DEBUGGER) ? _DBG_CODE_SIZE : 0x0);
-  } > debug_exec_mem
-  .app_excpt _GEN_EXCPT_ADDR :
+  } > debug_exec_mem */
+
+/*  .app_excpt _GEN_EXCPT_ADDR :
   {
     KEEP(*(.gen_handler))
   } > exception_mem
@@ -391,7 +392,7 @@ SECTIONS
      KEEP(*(.vector_43))
   } > exception_mem
   ASSERT (_vector_spacing == 0 || SIZEOF(.vector_43) <= (_vector_spacing << 5), "function at exception vector 43 too large")
-
+*/
   /*  The startup code is in the .reset.startup section.
    *  Keep this here for backwards compatibility with older
    *  C32 v1.xx releases.
