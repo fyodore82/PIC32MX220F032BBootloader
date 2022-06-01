@@ -48,7 +48,7 @@
 /* Rule: Set APP_FLASH_BASE_ADDRESS to _RESET_ADDR value of application linker script*/
 
 // For PIC32MX1xx and PIC32MX2xx Controllers only
-#define USER_APP_RESET_ADDRESS 	(APP_FLASH_BASE_ADDRESS + 0x1000)
+#define USER_APP_RESET_ADDRESS 	(APP_FLASH_BASE_ADDRESS) // + 0x1000)
 
 
 
