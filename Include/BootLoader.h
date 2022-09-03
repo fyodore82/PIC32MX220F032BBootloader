@@ -41,7 +41,7 @@
  		 
  		2)The base address and end address must align on  4K address boundary */
  		
-#define APP_FLASH_BASE_ADDRESS 	0x9D002400 
+#define APP_FLASH_BASE_ADDRESS 	0x9D002000 
 #define APP_FLASH_END_ADDRESS   PROGRAM_FLASH_END_ADRESS
 
 /* Address of  the Flash from where the application starts executing */

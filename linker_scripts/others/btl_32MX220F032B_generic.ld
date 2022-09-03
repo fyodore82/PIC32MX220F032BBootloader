@@ -113,9 +113,9 @@ _GEN_EXCPT_ADDR          = _ebase_address + 0x180;
  *************************************************************************/
 MEMORY
 {
-  kseg0_program_mem    (rx)  : ORIGIN = 0x9D000000, LENGTH = 0x23FF /* All C Files will be located here */
-  kseg0_boot_mem             : ORIGIN = 0x9FC00490, LENGTH = 0x0 /* This memory region is dummy */
-  kseg1_boot_mem             : ORIGIN = 0xBFC00000, LENGTH = 0xBEF /* C Startup code */
+  kseg0_program_mem    (rx)  : ORIGIN = 0x9D000000, LENGTH = 0x1FFF /* All C Files will be located here */
+  kseg0_boot_mem             : ORIGIN = 0x9FC00500, LENGTH = 0x6EF /* Additional program mem */
+  kseg1_boot_mem             : ORIGIN = 0xBFC00000, LENGTH = 0x500 /* C Startup code */
   config3                    : ORIGIN = 0xBFC00BF0, LENGTH = 0x4
   config2                    : ORIGIN = 0xBFC00BF4, LENGTH = 0x4
   config1                    : ORIGIN = 0xBFC00BF8, LENGTH = 0x4
@@ -159,6 +159,15 @@ SECTIONS
   {
     KEEP(*(.startup))
   } > kseg0_boot_mem
+  .text.BuildRxFrame : {
+    *(.text.BuildRxFrame)
+  } >kseg0_boot_mem
+  .text.GetTransmitFrame : {
+    *(.text.GetTransmitFrame)
+  } >kseg0_boot_mem
+  .text.WriteHexRecord2Flash : {
+    *(.text.WriteHexRecord2Flash)
+  } >kseg0_boot_mem
   .text :
   {
     *(.text.unlikely .text.*_unlikely .text.unlikely.*)

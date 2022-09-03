@@ -134,7 +134,7 @@
                   value="../..;../../Include;../../Include/Usb/Stack;../../Include/FrameWork;../../Include/Usb;../../Include/HardwareProfile;../../Include/USB;../../Include/Framework"/>
         <property key="generate-16-bit-code" value="true"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="isolate-each-function" value="false"/>
+        <property key="isolate-each-function" value="true"/>
         <property key="make-warnings-into-errors" value="false"/>
         <property key="optimization-level" value="-O2"/>
         <property key="place-data-into-section" value="false"/>
