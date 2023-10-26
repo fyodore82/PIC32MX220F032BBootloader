@@ -50,7 +50,8 @@
 // For PIC32MX1xx and PIC32MX2xx Controllers only
 #define USER_APP_RESET_ADDRESS 	(APP_FLASH_BASE_ADDRESS) // + 0x1000)
 
-
+#define BUTTON_IN PORTBbits.RB0
+#define BEEPER_CTRL_OUT PORTBbits.RB15  // pin 26
 
 //-------User configurable macros end-----------
 

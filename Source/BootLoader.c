@@ -160,6 +160,26 @@ extern inline unsigned int __attribute__((always_inline)) SYSTEMConfig(unsigned 
 
 }
 
+#define _XTAL_FREQ   40000000UL
+
+void __delay_ms(UINT8 ms) {
+  uint32_t start_count = _CP0_GET_COUNT();
+  uint32_t now_count;
+  uint32_t cycles = ((_XTAL_FREQ + 1000000U) / 2000U) * ms;
+  do {
+    now_count = _CP0_GET_COUNT();
+  } while ((uint32_t)(now_count-start_count) < cycles);
+}
+
+void playNote(UINT8 note, UINT8 delay) {
+  BEEPER_CTRL_OUT = 1;
+  for (UINT8 beep = 0; beep < delay; beep++) {
+    BEEPER_CTRL_OUT = !BEEPER_CTRL_OUT;
+    __delay_ms(note);
+  }
+  BEEPER_CTRL_OUT = 0;
+}
+
 /********************************************************************
 * Function: 	main()
 *
@@ -181,14 +201,45 @@ extern inline unsigned int __attribute__((always_inline)) SYSTEMConfig(unsigned 
 INT main(void)
 {
 	UINT pbClk;
+  
+    // ------------ init ports -----------------
+  PORTA = 0;
+  PORTB = 0;
+  LATA = 0;
+  LATB = 0;
 
+  // 12.2.4 ODCx. ODCx for all ports are 0 on reset = normal digital output, NOT open-drain
+
+  // 12.2.5 ANSELx. Set all ports to digital.
+  ANSELA = 0x0;
+  ANSELB = 0x0;
+  
+    // V pin 26 BEEPER_CTRL_OUT
+  TRISBbits.TRISB15 = 0;
+  BEEPER_CTRL_OUT = 0;
+  
+  // If Btn was pressed during at least 30ms at the start
+  __delay_ms(10);
+  UINT8 btnPressed = 0;
+  UINT8 btn = BUTTON_IN;
+  btn = BUTTON_IN;
+  while (!btn && btnPressed <= 3) {
+    btnPressed++;
+    __delay_ms(10);
+    btn = BUTTON_IN;
+  }
+  
 	// Setup configuration
 	pbClk = SYSTEMConfig(SYS_FREQ, SYS_CFG_WAIT_STATES | SYS_CFG_PCACHE);
 	
   UINT8 swr = RCONbits.SWR;
   UINT8 validApp = ValidAppPresent();
-	if(!validApp || (validApp && swr))
+	if(!validApp || (validApp && swr) || btnPressed >= 3)
 	{
+    playNote(3, 90);
+    playNote(1, 90);
+    playNote(2, 90);
+    
 		// Initialize the transport layer - UART/USB/Ethernet
 		TRANS_LAYER_Init(pbClk);
 		
