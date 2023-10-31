@@ -57,7 +57,7 @@
 // DEVCFG1
 #pragma config FWDTEN = OFF             // WD timer: OFF
 #pragma config FCKSM = 0b11               // Disabled
-#pragma config FPBDIV = DIV_1           // Peripheral Bus Clock: Divide by 1
+#pragma config FPBDIV = DIV_2           // Peripheral Bus Clock: Divide by 1
 #pragma config OSCIOFNC = 0             // OLKO is disabled
 #pragma config POSCMOD = HS             // Primary Oscillator Mode: High Speed xtal
 #pragma config IESO = 0                 // Internal External Switchover mode is disabled
@@ -118,47 +118,47 @@ BOOL ValidAppPresent(void);
  *
  * Example:	    SYSTEMConfig(72000000, SYS_CFG_ALL);
  ********************************************************************/
-extern inline unsigned int __attribute__((always_inline)) SYSTEMConfig(unsigned int sys_clock, unsigned int flags)
-{
-    unsigned int pb_clk;
-    unsigned int int_status;
-#ifdef _PCACHE
-    unsigned int cache_status;
-#endif
-
-    int_status=INTDisableInterrupts();
-
-    mBMXDisableDRMWaitState();
-
-//    if(flags & SYS_CFG_WAIT_STATES)
+//extern inline unsigned int __attribute__((always_inline)) SYSTEMConfig(unsigned int sys_clock, unsigned int flags)
+//{
+//    unsigned int pb_clk;
+//    unsigned int int_status;
+//#ifdef _PCACHE
+//    unsigned int cache_status;
+//#endif
+//
+//    int_status=INTDisableInterrupts();
+//
+//    mBMXDisableDRMWaitState();
+//
+////    if(flags & SYS_CFG_WAIT_STATES)
+////    {
+////        SYSTEMConfigWaitStates(sys_clock);
+////    }
+//
+////    if(flags & SYS_CFG_PB_BUS)
+////    {
+////        SYSTEMConfigPB(sys_clock);
+////    }
+//
+//
+//#ifdef _PCACHE
+//    if(flags & SYS_CFG_PCACHE)
 //    {
-//        SYSTEMConfigWaitStates(sys_clock);
+//        cache_status = mCheGetCon();
+//        cache_status |= CHE_CONF_PF_ALL;
+//        mCheConfigure(cache_status);
+//        CheKseg0CacheOn();
 //    }
-
-//    if(flags & SYS_CFG_PB_BUS)
-//    {
-//        SYSTEMConfigPB(sys_clock);
-//    }
-
-
-#ifdef _PCACHE
-    if(flags & SYS_CFG_PCACHE)
-    {
-        cache_status = mCheGetCon();
-        cache_status |= CHE_CONF_PF_ALL;
-        mCheConfigure(cache_status);
-        CheKseg0CacheOn();
-    }
-#endif
-
-    pb_clk = sys_clock;
-    pb_clk >>= OSCCONbits.PBDIV;
-
-    INTRestoreInterrupts(int_status);
-
-    return pb_clk;
-
-}
+//#endif
+//
+//    pb_clk = sys_clock;
+//    pb_clk >>= OSCCONbits.PBDIV;
+//
+//    INTRestoreInterrupts(int_status);
+//
+//    return pb_clk;
+//
+//}
 
 #define _XTAL_FREQ   40000000UL
 
@@ -200,9 +200,12 @@ void playNote(UINT8 note, UINT8 delay) {
 ********************************************************************/
 INT main(void)
 {
-	UINT pbClk;
+//	UINT pbClk;
   
-    // ------------ init ports -----------------
+  CFGCONbits.TDOEN = 0;
+  CFGCONbits.JTAGEN = 0;
+  
+  // ------------ init ports -----------------
   PORTA = 0;
   PORTB = 0;
   LATA = 0;
@@ -219,7 +222,7 @@ INT main(void)
   BEEPER_CTRL_OUT = 0;
   
   // If Btn was pressed during at least 30ms at the start
-  __delay_ms(10);
+  __delay_ms(200);
   UINT8 btnPressed = 0;
   UINT8 btn = BUTTON_IN;
   btn = BUTTON_IN;
@@ -230,7 +233,7 @@ INT main(void)
   }
   
 	// Setup configuration
-	pbClk = SYSTEMConfig(SYS_FREQ, SYS_CFG_WAIT_STATES | SYS_CFG_PCACHE);
+//	pbClk = SYSTEMConfig(SYS_FREQ, SYS_CFG_WAIT_STATES | SYS_CFG_PCACHE);
 	
   UINT8 swr = RCONbits.SWR;
   UINT8 validApp = ValidAppPresent();
@@ -241,7 +244,7 @@ INT main(void)
     playNote(2, 90);
     
 		// Initialize the transport layer - UART/USB/Ethernet
-		TRANS_LAYER_Init(pbClk);
+		TRANS_LAYER_Init(0);
 		
 		while(!FRAMEWORK_ExitFirmwareUpgradeMode()) // Be in loop till framework recieves "run application" command from PC
 		{
